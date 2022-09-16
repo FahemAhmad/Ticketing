@@ -3,9 +3,10 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../assets/images/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
+  { name: "Dashboard", href: "#", current: true, link: "/dashboard" },
   { name: "Tickets", href: "#", current: false },
   { name: "Projects", href: "#", current: false },
   { name: "Signout", href: "#", current: false },
@@ -16,6 +17,7 @@ function classNames(...classes) {
 }
 
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Disclosure as="nav">
@@ -52,7 +54,7 @@ const Navbar = () => {
                       {navigation.map((item) => (
                         <a
                           key={item.name}
-                          href={item.href}
+                          href={item.link}
                           className={classNames(
                             item.current
                               ? "bg-cyan-900 text-white"

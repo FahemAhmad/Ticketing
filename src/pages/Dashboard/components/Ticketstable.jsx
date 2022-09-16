@@ -1,83 +1,49 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./ticketable.css";
 
-const array = [];
+const Ticketstable = ({ tickets }) => {
+  const navigate = useNavigate();
 
-const Ticketstable = () => {
   return (
     <>
-      <div class="container">
-        <div class="row">
+      <div className="container">
+        <div className="row">
           <input
             type="Search"
-            class="ticketSearch"
+            className="ticketSearch"
             placeholder="Search for ticket"
           />
-          <button class="btn-ticket">Add New Ticket</button>
+          <button className="btn-ticket" onClick={() => navigate("/addTicket")}>
+            Add New Ticket
+          </button>
         </div>
 
         <table>
-          <tr>
-            <th>Data 1</th>
-            <th>Remarks</th>
-            <th>Phase</th>
-            <th>Status</th>
-            <th>Maintainence Agent </th>
-          </tr>
-          <tr>
-            <td>test Data 1</td>
-            <td>test remarks</td>
-            <td>test phase</td>
-            <td>
-              <p className="status open">open</p>
-            </td>
-            <td>test-agent</td>
-          </tr>
-          <tr>
-            <td>test Data 1</td>
-            <td>test remarks</td>
-            <td>test phase</td>
-            <td>
-              <p className="status open">open</p>
-            </td>
-            <td>test-agent</td>
-          </tr>
-          <tr>
-            <td>test Data 1</td>
-            <td>test remarks</td>
-            <td>test phase</td>
-            <td>
-              <p className="status open">open</p>
-            </td>
-            <td>test-agent</td>
-          </tr>
-          <tr>
-            <td>test Data 1</td>
-            <td>test remarks</td>
-            <td>test phase</td>
-            <td>
-              <p className="status open">open</p>
-            </td>
-            <td>test-agent</td>
-          </tr>
-          <tr>
-            <td>test Data 1</td>
-            <td>test remarks</td>
-            <td>test phase</td>
-            <td>
-              <p className="status resolved">resolved</p>
-            </td>
-            <td>test-agent</td>
-          </tr>
-          <tr>
-            <td>test Data 1</td>
-            <td>test remarks</td>
-            <td>test phase</td>
-            <td>
-              <p className="status pending">Pending</p>
-            </td>
-            <td>test-agent</td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Data 1</th>
+              <th>Remarks</th>
+              <th>Phase</th>
+              <th>Status</th>
+              <th>Maintainence Agent </th>
+            </tr>
+          </thead>
+          <tbody>
+            {tickets.map((singleTicket, index) => (
+              <tr key={index}>
+                <td>{singleTicket.DATA1}</td>
+                <td>{singleTicket.Remarks}</td>
+                <td>{singleTicket.phase}</td>
+                <td>
+                  <p className={`status ${singleTicket.status}`}>
+                    {singleTicket.status}
+                  </p>
+                </td>
+                <td>{singleTicket?.maintanance_agent}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </>

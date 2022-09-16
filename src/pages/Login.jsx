@@ -19,10 +19,16 @@ const initialValues = {
 };
 
 const LoggedUserIn = async (values) => {
-  await apiCalls.loginApi(values).then((data) => {
-    localStorage.setItem("token", data?.data.access_token);
-    window.location = "https://localhost:3000/dashboard";
-  });
+  await apiCalls
+    .loginApi(values)
+    .then((data) => {
+      console.log("testing");
+      localStorage.setItem("token", data?.data.access_token);
+      window.location = "http://localhost:3000/dashboard";
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const Login = () => {
