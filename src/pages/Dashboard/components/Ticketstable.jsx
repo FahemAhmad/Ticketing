@@ -27,10 +27,11 @@ const Ticketstable = ({ tickets }) => {
               <th>Phase</th>
               <th>Status</th>
               <th>Maintainence Agent </th>
+              <th>Device Type</th>
             </tr>
           </thead>
           <tbody>
-            {tickets.map((singleTicket, index) => (
+            {tickets?.map((singleTicket, index) => (
               <tr key={index}>
                 <td>{singleTicket.DATA1}</td>
                 <td>{singleTicket.Remarks}</td>
@@ -40,7 +41,8 @@ const Ticketstable = ({ tickets }) => {
                     {singleTicket.status}
                   </p>
                 </td>
-                <td>{singleTicket?.maintanance_agent}</td>
+                <td>{singleTicket.maintanance_agent}</td>
+                <td>{singleTicket.device_type}</td>
               </tr>
             ))}
           </tbody>

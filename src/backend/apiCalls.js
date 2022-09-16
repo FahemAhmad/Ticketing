@@ -7,8 +7,10 @@ const loginApi = (values) => httpService.post(`/login`, values);
 const getTicketsApi = () => httpService.get(`/getTickets`);
 
 //add Tickets
+const addTicketApi = (values) => httpService.post(`/addTicket`, values);
 
 export default {
   loginApi,
   getTicketsApi,
+  addTicketApi,
 };
