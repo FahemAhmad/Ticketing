@@ -1,15 +1,15 @@
 import React from "react";
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Disclosure } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true, link: "/dashboard" },
-  { name: "Tickets", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Signout", href: "#", current: false },
+  { name: "Search", href: "#", current: false },
+  { name: "Report", href: "#", current: false },
+  { name: "Asset Inventory", href: "#", current: false },
+  { name: "Create Ticket", href: "#", current: false, link: "/addTicket" },
 ];
 
 function classNames(...classes) {
@@ -27,7 +27,7 @@ const Navbar = () => {
               <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-cyan-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-sky-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -57,8 +57,8 @@ const Navbar = () => {
                           href={item.link}
                           className={classNames(
                             item.current
-                              ? "bg-cyan-900 text-white"
-                              : "text-gray-700 hover:bg-cyan-900 hover:text-white",
+                              ? "bg-sky-500 text-white"
+                              : "text-gray-700 hover:bg-sky-500 hover:text-white",
                             "px-3 py-2 rounded-md text-sm font-medium"
                           )}
                           aria-current={item.current ? "page" : undefined}
@@ -81,8 +81,8 @@ const Navbar = () => {
                     href={item.href}
                     className={classNames(
                       item.current
-                        ? "bg-cyan-900 text-white"
-                        : "text-gray-800 hover:bg-cyan-900 hover:text-white",
+                        ? "bg-sky-500 text-white"
+                        : "text-gray-800 hover:bg-sky-500 hover:text-white",
                       "block px-3 py-2 rounded-md text-base font-medium"
                     )}
                     aria-current={item.current ? "page" : undefined}

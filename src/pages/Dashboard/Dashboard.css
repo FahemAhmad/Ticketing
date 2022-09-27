@@ -1,0 +1,124 @@
+.dashboard-contianer {
+  background-color: #f1f7fc;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 20vh;
+  max-height: max-content;
+  gap: 15px;
+}
+
+.second-row {
+  display: flex;
+  min-height: 50vh;
+  gap: 15px;
+}
+
+.tickets-table {
+  flex: 4;
+  width: 100%;
+  min-height: 100%;
+  background: white;
+  border-radius: 3px;
+}
+
+.graph-container {
+  flex: 2;
+  width: 100%;
+  min-height: 100%;
+  background: white;
+  border-radius: 3px;
+}
+
+.graphs-row {
+  display: flex;
+  gap: 15px;
+  min-height: 40vh;
+}
+
+/* StatsCard Styles */
+
+.stats-card-container {
+  flex: 1;
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+  font-weight: normal;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 0.9rem;
+  line-height: 1rem;
+  border-radius: 3px;
+}
+
+.counter {
+  font-size: 3rem;
+  line-height: 4rem;
+  font-weight: 600;
+}
+
+/* Open Tickets */
+
+.open-tickets-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 0px;
+}
+
+.open-tickets-container h2 {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.doughnut-chart {
+  width: 50%;
+  position: relative;
+}
+
+.doughnut-center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  line-height: 1.7rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.fieldNames-container {
+  margin-top: 40px;
+}
+
+.circle {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+}
+
+.my-flex {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: start;
+  gap: 5px;
+}
