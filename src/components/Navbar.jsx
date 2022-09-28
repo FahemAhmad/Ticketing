@@ -2,22 +2,37 @@ import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../assets/images/logo.png";
-import { useNavigate } from "react-router-dom";
-
-const navigation = [
-  { name: "Dashboard", href: "#", current: true, link: "/dashboard" },
-  { name: "Search", href: "#", current: false },
-  { name: "Report", href: "#", current: false },
-  { name: "Asset Inventory", href: "#", current: false },
-  { name: "Create Ticket", href: "#", current: false, link: "/addTicket" },
-];
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Navbar = () => {
+  const location = useLocation();
+
+  const navigation = [
+    {
+      name: "Dashboard",
+      href: "#",
+      current: location.pathname === "/dashboard",
+      link: "/dashboard",
+    },
+    { name: "Search", href: "#", current: false },
+    { name: "Report", href: "#", current: false },
+    { name: "Asset Inventory", href: "#", current: false },
+    {
+      name: "Create Ticket",
+      href: "#",
+      current: location.pathname === "/addTicket",
+      link: "/addTicket",
+    },
+  ];
+
   const navigate = useNavigate();
+
+  if (location.pathname === "/") return;
+
   return (
     <>
       <Disclosure as="nav">

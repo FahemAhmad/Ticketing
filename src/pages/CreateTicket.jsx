@@ -57,7 +57,7 @@ const AddNewTicket = async (values, resetForm) => {
     .addTicketApi(values)
     .then((data) => {
       console.log(data);
-      alert(data.data);
+
       resetForm();
     })
     .catch((err) => alert("Error adding Ticket"));
