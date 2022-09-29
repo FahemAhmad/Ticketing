@@ -27,25 +27,26 @@ const GridTable = ({ tickets }) => {
   const [rowData, setRowData] = useState();
 
   const columnDefs = [
-    {
-      field: "internal_incident_no",
-      headerName: "Incident #",
-    },
+    { field: "source_incident_no", headerName: "Source Incident No" },
     {
       field: "time_to_resolve_sla",
       headerName: "SLA",
       width: 70,
       cellRenderer: slaComp,
     },
-    { field: "fault_description", headerName: "Fault Description" },
+    {
+      field: "internal_incident_no",
+      headerName: "Internal Incident #",
+    },
+    { field: "status", headerName: "Status" },
     {
       field: "opening_time",
-      headerName: "Opening time",
+      headerName: "Opening Time",
     },
-    { field: "closing_time", headerName: "Closing time" },
+    { field: "fault_description", headerName: "Fault Description" },
+    
     { field: "resolution", headerName: "Resolution" },
-    { field: "source_incident_no", headerName: "Source Incident No" },
-    { field: "status", headerName: "Status" },
+    { field: "closing_time", headerName: "Closing Time" },
     { field: "time_to_resolve", headerName: "Time to Resolve" },
   ];
 

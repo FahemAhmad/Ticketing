@@ -1,4 +1,5 @@
 import { Formik } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import apiCalls from "../backend/apiCalls";
 
@@ -52,15 +53,31 @@ const fieldNames = [
   "comments",
 ];
 
+const mapNames = [
+  "Source Incident No#",
+  "Reporting Source",
+  "Internal Incident No#",
+  "Phase",
+  "Site",
+  "Device Type",
+  "Last Octet",
+  "Fault Description",
+  "Resolution",
+  "Maintanance Agent",
+  "Comments",
+];
+
 const AddNewTicket = async (values, resetForm) => {
   await apiCalls
     .addTicketApi(values)
     .then((data) => {
       console.log(data);
-
       resetForm();
+      // navigate('/dashboard')
     })
     .catch((err) => alert("Error adding Ticket"));
+  
+    
 };
 
 const CreateTicket = () => {
@@ -104,9 +121,10 @@ const CreateTicket = () => {
                         <div className="col-span-6 sm:col-span-3" key={index}>
                           <label
                             htmlFor={singleField}
-                            className="block text-sm font-medium text-gray-700"
+                            // className="block text-sm font-medium text-gray-700 "
+                            className="px-3 p-1 rounded-md text-base font-medium bg-sky-500 text-white"
                           >
-                            {singleField}
+                            <u>{mapNames[index]}:</u>
                           </label>
                           <input
                             type="text"

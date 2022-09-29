@@ -40,15 +40,6 @@ const Login = () => {
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Login to your account
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Or{" "}
-            <a
-              href="/"
-              className="font-medium text-cyan-600 hover:text-cyan-500"
-            >
-              Create an Account
-            </a>
-          </p>
         </div>
 
         {/* Formik is a library for building and validating forms */}
@@ -109,18 +100,6 @@ const Login = () => {
               {errors.password && touched.password && (
                 <span style={{ color: "red" }}>{errors.password}</span>
               )}
-
-              <div className="flex items-center justify-end">
-                <div className="text-sm">
-                  <a
-                    href="/"
-                    className="font-medium text-cyan-600 hover:text-cyan-500"
-                  >
-                    Forgot your password?
-                  </a>
-                </div>
-              </div>
-
               <div>
                 <button
                   type="submit"
