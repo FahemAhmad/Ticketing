@@ -1,5 +1,4 @@
 import { Formik } from "formik";
-import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import apiCalls from "../backend/apiCalls";
 
@@ -73,11 +72,8 @@ const AddNewTicket = async (values, resetForm) => {
     .then((data) => {
       console.log(data);
       resetForm();
-      // navigate('/dashboard')
     })
     .catch((err) => alert("Error adding Ticket"));
-  
-    
 };
 
 const CreateTicket = () => {
@@ -122,9 +118,9 @@ const CreateTicket = () => {
                           <label
                             htmlFor={singleField}
                             // className="block text-sm font-medium text-gray-700 "
-                            className="px-3 p-1 rounded-md text-base font-medium bg-sky-500 text-white"
+                            className="px-3 p-1 rounded-md font-medium bg-sky-500 text-white"
                           >
-                            <u>{mapNames[index]}:</u>
+                            <u className="no-underline">{mapNames[index]} :</u>
                           </label>
                           <input
                             type="text"
@@ -142,18 +138,23 @@ const CreateTicket = () => {
                           )}
                         </div>
                       ))}
-
-                      <button
-                        className="btn-ticket"
-                        style={{
-                          padding: "10px 15px",
-                          background: "black",
-                          color: "white",
-                        }}
-                        type="submit"
-                      >
-                        Add Ticket
-                      </button>
+                      <div className="col-span-6 sm:col-span-3">
+                        <button
+                          className="btn-ticket"
+                          style={{
+                            padding: "0px 10px",
+                            background: "black",
+                            color: "white",
+                            height: 33,
+                            width: "100%",
+                            margin: "auto 0",
+                            marginTop: 30,
+                          }}
+                          type="submit"
+                        >
+                          Add Ticket
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

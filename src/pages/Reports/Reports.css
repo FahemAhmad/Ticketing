@@ -1,0 +1,97 @@
+.reports-container {
+  background-color: #f1f7fc;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reports-filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 40vh;
+  min-height: fit-content;
+  gap: 15px;
+}
+
+/*Filters card container */
+
+.filter-card-container {
+  flex: 2;
+  background-color: white;
+  padding: 10px 10px 0px 10px;
+  text-align: center;
+  font-weight: normal;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 3px;
+  text-align: start;
+}
+
+/* Selected Fields*/
+
+.selected-card-container {
+  flex: 3;
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+  font-weight: normal;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 0.9rem;
+  line-height: 1rem;
+  border-radius: 3px;
+
+  overflow-y: scroll;
+}
+
+/* Dropw Downs */
+
+.dropdown-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 2.2rem;
+}
+
+.dropdown-list input {
+  height: 100%;
+  width: 100%;
+  max-height: 25px;
+}
+
+.search-wrapper {
+  width: 100%;
+  max-height: fit-content;
+}
+
+.highlightOption {
+  background-color: rgb(14 165 233 / 500);
+}
+
+.chip {
+  background-color: rgb(14 165 233 / 500);
+  padding: 5px 10px;
+}
+
+.multiSelectContainer li {
+  padding: 0 10px;
+}
+
+.reports-table {
+  background-color: white;
+  padding: 10px;
+}
+
+.singleChip {
+  color: white;
+}

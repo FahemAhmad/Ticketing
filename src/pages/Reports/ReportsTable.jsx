@@ -1,10 +1,24 @@
 import { AgGridReact } from "ag-grid-react";
 import React, { useMemo, useState } from "react";
 import "ag-grid-community/styles/ag-grid.css";
-import "./GridTable.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import "../../components/GridTable.css";
+
 import { useEffect } from "react";
+
+const fieldNames = [
+  "source_incident_no",
+  "reporting_source",
+  "internal_incident_no",
+  "phase",
+  "site",
+  "device_type",
+  "last_octet",
+  "fault_description",
+  "resolution",
+  "maintanance_agent",
+  "comments",
+];
+
 
 const slaComp = (p) => {
   return (
@@ -20,24 +34,25 @@ const slaComp = (p) => {
   );
 };
 
-const GridTable = ({ tickets }) => {
-  console.log("thi");
+const ReportsTable = ({ tickets, selectedFields }) => {
   const [gridApi, setGridApi] = useState(null);
   const [gridColumnApi, setGridColumnApi] = useState(null);
+
   const [rowData, setRowData] = useState();
 
   const columnDefs = [
-    { field: "source_incident_no", headerName: "Source Incident No" },
-    {
-      field: "time_to_resolve_sla",
-      headerName: "SLA",
-      width: 70,
-      cellRenderer: slaComp,
-    },
-    {
-      field: "internal_incident_no",
-      headerName: "Internal Incident #",
-    },
+    ()=>fieldNames.filter((singleField,index)=>singleField )
+      { field: "source_incident_no", headerName: "Source Incident No" },
+      {
+        field: "time_to_resolve_sla",
+        headerName: "SLA",
+        width: 70,
+        cellRenderer: slaComp,
+      },
+      {
+        field: "internal_incident_no",
+        headerName: "Internal Incident #",
+      },
     { field: "status", headerName: "Status" },
     {
       field: "opening_time",
@@ -55,9 +70,6 @@ const GridTable = ({ tickets }) => {
     setGridColumnApi(params.columnApi);
   }
 
-  const onFilterTextChange = (e) => {
-    gridApi.setQuickFilter(e.target.value);
-  };
   const defaultColDef = useMemo(() => ({
     resizable: true,
     flex: 1,
@@ -69,16 +81,6 @@ const GridTable = ({ tickets }) => {
 
   return (
     <div className="grid-container">
-      <div className="search-container">
-        <input
-          type="search"
-          onChange={onFilterTextChange}
-          placeholder="Enter search keywords"
-          className="grid-search"
-        />
-        <FontAwesomeIcon icon={faFilter} className="icons fa-lg" />
-      </div>
-
       <div
         className="ag-theme-alpine"
         style={{ height: 500, overflowY: "scroll" }}
@@ -95,4 +97,4 @@ const GridTable = ({ tickets }) => {
   );
 };
 
-export default GridTable;
+export default ReportsTable;

@@ -19,13 +19,24 @@ const Navbar = () => {
       link: "/dashboard",
     },
     { name: "Search", href: "#", current: false },
-    { name: "Report", href: "#", current: false },
+    {
+      name: "Report",
+      href: "#",
+      current: location.pathname === "/reports",
+      link: "/reports",
+    },
     { name: "Asset Inventory", href: "#", current: false },
     {
       name: "Create Ticket",
       href: "#",
       current: location.pathname === "/addTicket",
       link: "/addTicket",
+    },
+    {
+      name: "Add User",
+      href: "#",
+      current: location.pathname === "/createUser",
+      link: "/createUser",
     },
   ];
 

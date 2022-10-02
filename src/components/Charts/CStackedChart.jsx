@@ -28,7 +28,6 @@ export const options = {
     },
     title: {
       display: false,
-      text: "Chart.js Bar Chart - Stacked",
     },
   },
   responsive: true,

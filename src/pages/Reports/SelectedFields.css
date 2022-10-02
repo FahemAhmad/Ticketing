@@ -1,0 +1,35 @@
+.checkList {
+  width: 100%;
+  padding: 10px;
+}
+.title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: start;
+  margin-bottom: 15px;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 20px;
+}
+.checked-item,
+.not-checked-item {
+  margin-left: 10px;
+}
+.not-checked-item {
+  text-decoration: line-through;
+}
+
+.list-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.singleItem {
+  display: flex;
+  justify-content: flex-start;
+}
