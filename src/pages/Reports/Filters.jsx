@@ -3,6 +3,30 @@ import { useEffect } from "react";
 import Dropdown from "../../components/Dropdown";
 import "./Reports.css";
 
+/*
+If By Tickets - Show the following fields
+* Date
+* Dev Type
+* Ticket status
+* Column pick
+
+
+For SLA
+* Date
+* Dev Type
+* Ticket Status
+
+
+For Status
+* Date
+* Dev Type
+
+For Device
+* Date
+* Status
+
+*/
+
 const filterOptions = ["Status", "SLA", "Device types", "By Tickets"];
 
 const durationOptions = ["Day", "Month", "Year"];
@@ -44,27 +68,16 @@ const deviceOptions = [
 ];
 const sla = ["Respond Time", "Resolve Time"];
 
-const Filters = () => {
-  const [selected, setSelected] = useState();
-  const [currentArray, setCurrentArray] = useState();
-
-  useEffect(() => {
-    if (selected) {
-      if (selected[0] === "Status") {
-        setCurrentArray(statusOptions);
-      } else if (selected[0] === "SLA") {
-        setCurrentArray(sla);
-      } else if (selected[0] === "By Tickets") {
-        setCurrentArray();
-      } else {
-        setCurrentArray(deviceOptions);
-      }
-    }
-  }, [selected]);
-
+const Filters = ({ selected, setSelected }) => {
   return (
     <>
-      <div className="filter-card-container">
+      <div
+        className={
+          selected[0] !== "By Tickets"
+            ? "filter-card-container two-columns"
+            : "filter-card-container"
+        }
+      >
         <Dropdown
           placeholder={"Filter reports"}
           label={"Filter report"}
@@ -73,11 +86,24 @@ const Filters = () => {
           setSelected={setSelected}
         />
 
-        <Dropdown
-          placeholder={selected ? selected : "Further Options"}
-          label={selected ? selected : "Further Options"}
-          options={currentArray}
-        />
+        {(selected[0] === "By Tickets" ||
+          selected[0] === "SLA" ||
+          selected[0] === "Status") && (
+          <Dropdown
+            placeholder={"Select Device"}
+            label={"Device Type"}
+            options={deviceOptions}
+          />
+        )}
+        {(selected[0] === "By Tickets" ||
+          selected[0] === "SLA" ||
+          selected[0] === "Device types") && (
+          <Dropdown
+            placeholder={"Status"}
+            label={"Set Status"}
+            options={statusOptions}
+          />
+        )}
 
         <Dropdown
           placeholder={"Duration"}

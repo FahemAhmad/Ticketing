@@ -24,6 +24,7 @@ const LoggedUserIn = async (values) => {
     .then((data) => {
       console.log("testing");
       localStorage.setItem("token", data?.data.access_token);
+      localStorage.setItem("role", data?.data.role);
       window.location = "http://localhost:3000/dashboard";
     })
     .catch((err) => {

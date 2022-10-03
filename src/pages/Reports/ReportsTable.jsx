@@ -5,6 +5,20 @@ import "../../components/GridTable.css";
 
 import { useEffect } from "react";
 
+const mapNames = [
+  "Source Incident No#",
+  "Reporting Source",
+  "Internal Incident No#",
+  "Phase",
+  "Site",
+  "Device Type",
+  "Last Octet",
+  "Fault Description",
+  "Resolution",
+  "Maintanance Agent",
+  "Comments",
+];
+
 const fieldNames = [
   "source_incident_no",
   "reporting_source",
@@ -18,7 +32,6 @@ const fieldNames = [
   "maintanance_agent",
   "comments",
 ];
-
 
 const slaComp = (p) => {
   return (
@@ -37,33 +50,9 @@ const slaComp = (p) => {
 const ReportsTable = ({ tickets, selectedFields }) => {
   const [gridApi, setGridApi] = useState(null);
   const [gridColumnApi, setGridColumnApi] = useState(null);
+  const [columnDefs, setColumnsDefs] = useState([]);
 
   const [rowData, setRowData] = useState();
-
-  const columnDefs = [
-    ()=>fieldNames.filter((singleField,index)=>singleField )
-      { field: "source_incident_no", headerName: "Source Incident No" },
-      {
-        field: "time_to_resolve_sla",
-        headerName: "SLA",
-        width: 70,
-        cellRenderer: slaComp,
-      },
-      {
-        field: "internal_incident_no",
-        headerName: "Internal Incident #",
-      },
-    { field: "status", headerName: "Status" },
-    {
-      field: "opening_time",
-      headerName: "Opening Time",
-    },
-    { field: "fault_description", headerName: "Fault Description" },
-
-    { field: "resolution", headerName: "Resolution" },
-    { field: "closing_time", headerName: "Closing Time" },
-    { field: "time_to_resolve", headerName: "Time to Resolve" },
-  ];
 
   function onGridReady(params) {
     setGridApi(params.api);
@@ -73,11 +62,24 @@ const ReportsTable = ({ tickets, selectedFields }) => {
   const defaultColDef = useMemo(() => ({
     resizable: true,
     flex: 1,
+    sortable: true,
   }));
 
   useEffect(() => {
     setRowData(tickets);
   }, [tickets]);
+
+  useEffect(() => {
+    const arr = [];
+
+    fieldNames?.map((singleField, index) => {
+      if (selectedFields?.includes(singleField)) {
+        arr.push({ field: singleField, headerName: mapNames[index] });
+      }
+    });
+
+    setColumnsDefs(arr);
+  }, [selectedFields]);
 
   return (
     <div className="grid-container">

@@ -11,34 +11,58 @@ function classNames(...classes) {
 const Navbar = () => {
   const location = useLocation();
 
-  const navigation = [
-    {
-      name: "Dashboard",
-      href: "#",
-      current: location.pathname === "/dashboard",
-      link: "/dashboard",
-    },
-    { name: "Search", href: "#", current: false },
-    {
-      name: "Report",
-      href: "#",
-      current: location.pathname === "/reports",
-      link: "/reports",
-    },
-    { name: "Asset Inventory", href: "#", current: false },
-    {
-      name: "Create Ticket",
-      href: "#",
-      current: location.pathname === "/addTicket",
-      link: "/addTicket",
-    },
-    {
-      name: "Add User",
-      href: "#",
-      current: location.pathname === "/createUser",
-      link: "/createUser",
-    },
-  ];
+  const navigation =
+    localStorage.getItem("role") === "admin"
+      ? [
+          {
+            name: "Dashboard",
+            href: "#",
+            current: location.pathname === "/dashboard",
+            link: "/dashboard",
+          },
+          { name: "Search", href: "#", current: false },
+          {
+            name: "Report",
+            href: "#",
+            current: location.pathname === "/reports",
+            link: "/reports",
+          },
+          { name: "Asset Inventory", href: "#", current: false },
+          {
+            name: "Create Ticket",
+            href: "#",
+            current: location.pathname === "/addTicket",
+            link: "/addTicket",
+          },
+          {
+            name: "Add User",
+            href: "#",
+            current: location.pathname === "/createUser",
+            link: "/createUser",
+          },
+          {
+            name: "Upload File",
+            href: "#",
+            current: location.pathname === "/uploadFile",
+            link: "/uploadFile",
+          },
+        ]
+      : [
+          {
+            name: "Dashboard",
+            href: "#",
+            current: location.pathname === "/dashboard",
+            link: "/dashboard",
+          },
+          { name: "Search", href: "#", current: false },
+          {
+            name: "Report",
+            href: "#",
+            current: location.pathname === "/reports",
+            link: "/reports",
+          },
+          { name: "Asset Inventory", href: "#", current: false },
+        ];
 
   const navigate = useNavigate();
 

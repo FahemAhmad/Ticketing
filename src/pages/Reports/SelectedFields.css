@@ -32,4 +32,5 @@
 .singleItem {
   display: flex;
   justify-content: flex-start;
+  padding: 4px 0px;
 }

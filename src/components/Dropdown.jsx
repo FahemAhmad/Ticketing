@@ -10,10 +10,9 @@ const Dropdown = ({
   setSelected = function noRefCheck() {},
 }) => {
   return (
-    <div style={{ flex: 1, width: "100%" }}>
+    <div style={{ flex: 1, width: "100%", maxWidth: "45vw" }}>
       <label className="dropdown-title">{label}</label>
       <Multiselect
-        displayValue="key"
         className="dropdown-list"
         isObject={false}
         onKeyPressFn={function noRefCheck() {}}
@@ -22,7 +21,6 @@ const Dropdown = ({
         onSelect={(e) => setSelected(e)}
         placeholder={placeholder}
         options={options}
-        showCheckbox
         singleSelect={singleSelect}
       />
     </div>

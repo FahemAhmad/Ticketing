@@ -11,6 +11,7 @@ import "./Dashboard.css";
 
 const Dashboard = () => {
   const [tickets, setTickets] = useState();
+  const [stats, setStats] = useState();
   let cleanUp = true;
 
   const getTickets = async () => {
@@ -25,9 +26,21 @@ const Dashboard = () => {
       });
   };
 
+  const getStats = async () => {
+    await apiCalls
+      .getApiStatsApi()
+      .then((data) => {
+        setStats(data?.data);
+      })
+      .catch((err) => {
+        alert("Error with Ticketing", err);
+      });
+  };
+
   useEffect(() => {
     if (cleanUp) {
       getTickets();
+      getStats();
     }
 
     return () => {
@@ -40,9 +53,15 @@ const Dashboard = () => {
       <div className="stats-container">
         <StatsCard title={"Tickets i created today"} counter={10} />
         <StatsCard title={"My Assigned tickets"} counter={6} />
-        <StatsCard title={"Open tickets: my groups"} counter={228} />
-        <StatsCard title={"Today's Tickets"} counter={81} />
-        <StatsCard title={"Unassigned tickets: my groups"} counter={93} />
+        <StatsCard title={"Open tickets"} counter={stats ? stats.open : 0} />
+        <StatsCard
+          title={"Pendings Tickets"}
+          counter={stats ? stats.pending : 0}
+        />
+        <StatsCard
+          title={"Resolved tickets"}
+          counter={stats ? stats.resolved : 0}
+        />
         <StatsCard
           title={"Today's Tickets first contact resolution: me"}
           counter={33 + "%"}

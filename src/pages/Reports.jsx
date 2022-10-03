@@ -7,6 +7,7 @@ import SelectedFields from "./Reports/SelectedFields";
 
 const Reports = () => {
   const [selectedFields, setSelectedFields] = useState();
+  const [selected, setSelected] = useState(["By Tickets"]);
   const [tickets, setTickets] = useState();
   let cleanUp = true;
 
@@ -34,10 +35,18 @@ const Reports = () => {
 
   return (
     <>
-      <div className="reports-container">
+      <div
+        className={
+          selected[0] === "By Tickets"
+            ? "reports-container"
+            : "reports-container adjust-height"
+        }
+      >
         <div className="reports-filters">
-          <Filters />
-          <SelectedFields setSelectedFields={setSelectedFields} />
+          <Filters selected={selected} setSelected={setSelected} />
+          {selected[0] === "By Tickets" && (
+            <SelectedFields setSelectedFields={setSelectedFields} />
+          )}
         </div>
         <div className="reports-table">
           <ReportsTable tickets={tickets} selectedFields={selectedFields} />
