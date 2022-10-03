@@ -18,11 +18,10 @@ const Dashboard = () => {
     await apiCalls
       .getTicketsApi()
       .then((data) => {
-        console.log(data?.data);
         setTickets(data?.data);
       })
       .catch((err) => {
-        alert("Error with Ticketing", err);
+        console.log("Error with Ticketing", err);
       });
   };
 
@@ -30,10 +29,11 @@ const Dashboard = () => {
     await apiCalls
       .getApiStatsApi()
       .then((data) => {
+        console.log("Stats", data);
         setStats(data?.data);
       })
       .catch((err) => {
-        alert("Error with Ticketing", err);
+        console.log("Error with Ticketing", err);
       });
   };
 
@@ -51,21 +51,24 @@ const Dashboard = () => {
   return (
     <div className="dashboard-contianer">
       <div className="stats-container">
-        <StatsCard title={"Tickets i created today"} counter={10} />
-        <StatsCard title={"My Assigned tickets"} counter={6} />
+        <StatsCard
+          title={"Tickets i created today"}
+          counter={stats ? stats.tickets_created_today : 0}
+        />
+        <StatsCard
+          title={"Tickets Closed Today"}
+          counter={stats ? stats.tickets_closed_today : 0}
+        />
         <StatsCard title={"Open tickets"} counter={stats ? stats.open : 0} />
         <StatsCard
-          title={"Pendings Tickets"}
-          counter={stats ? stats.pending : 0}
+          title={"Closed Tickets"}
+          counter={stats ? stats.closed : 0}
         />
         <StatsCard
-          title={"Resolved tickets"}
-          counter={stats ? stats.resolved : 0}
+          title={"In Progress tickets"}
+          counter={stats ? stats.in_progress : 0}
         />
-        <StatsCard
-          title={"Today's Tickets first contact resolution: me"}
-          counter={33 + "%"}
-        />
+        <StatsCard title={"In Queue"} counter={stats ? stats.in_queue : 0} />
       </div>
 
       <div className="second-row">

@@ -21,7 +21,6 @@ const slaComp = (p) => {
 };
 
 const GridTable = ({ tickets }) => {
-  console.log("thi");
   const [gridApi, setGridApi] = useState(null);
   const [gridColumnApi, setGridColumnApi] = useState(null);
   const [rowData, setRowData] = useState();
@@ -61,6 +60,7 @@ const GridTable = ({ tickets }) => {
   const defaultColDef = useMemo(() => ({
     resizable: true,
     flex: 1,
+    sortable: true,
   }));
 
   useEffect(() => {

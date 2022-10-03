@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import apiCalls from "../backend/apiCalls";
 
 const UserSchema = Yup.object().shape({
   username: Yup.string().required("Username is required!"),
@@ -13,6 +14,17 @@ const initialValues = {
   role: "admin",
 };
 const CreateUser = () => {
+  const AddNewUser = async (values, resetForm) => {
+    await apiCalls
+      .getAddUserApi(values)
+      .then((data) => {
+        resetForm();
+      })
+      .catch((err) => {
+        console.log("Error Adding User");
+      });
+  };
+
   return (
     <>
       <h1
@@ -41,7 +53,7 @@ const CreateUser = () => {
             validationSchema={UserSchema}
             onSubmit={(values, { resetForm }) => {
               console.log(values);
-              //   AddNewTicket(values, resetForm);
+              AddNewUser(values, resetForm);
             }}
           >
             {({

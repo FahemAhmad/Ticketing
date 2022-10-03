@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,6 +13,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
 import "./charts.css";
+import apiCalls from "../../backend/apiCalls";
 
 ChartJS.register(
   CategoryScale,
@@ -25,44 +26,70 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-    },
-    title: {
-      display: true,
-    },
-  },
-};
-
-const labels = [
-  "New",
-  "Assigned",
-  "In Progress",
-  "On Hold",
-  "Awaiting Customer Response",
-  "Auto Closed by Rules",
-  "Closed Today",
-];
-export const data = {
-  labels,
-  datasets: [
-    {
-      fill: true,
-      label: "Dataset 2",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      borderColor: "rgb(53, 162, 235)",
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-    },
-  ],
-};
-
 export function CAreaChart() {
+  let cleanup = true;
+  const [openTicekts, setOpenTickets] = useState();
+  const [graphData, setGraphData] = useState();
+  const [fieldNames, setFieldName] = useState();
+
+  const getOpenTickets = async () => {
+    await apiCalls
+      .getLineChartApi()
+
+      .then((data) => setOpenTickets(data?.data))
+      .catch((err) => console.log("Err Getting Open Tickets"));
+  };
+
+  useEffect(() => {
+    if (cleanup) getOpenTickets();
+
+    return () => {
+      cleanup = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (openTicekts) {
+      let gd = Object.values(openTicekts);
+      gd.shift();
+      setGraphData(gd);
+      let fn = Object.keys(openTicekts);
+      fn.shift();
+      setFieldName(fn);
+    }
+  }, [openTicekts]);
+
+  //Chart details
+  const options = {
+    indexAxis: "y",
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      title: {
+        display: false,
+        text: "Chart.js Bar Chart",
+      },
+    },
+  };
+
+  const data = {
+    labels: fieldNames,
+    datasets: [
+      {
+        fill: true,
+        label: "Dataset 1",
+        data: graphData,
+        borderColor: "rgb(53, 162, 235)",
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
+    ],
+  };
+
   return (
     <div className="chart-container ">
-      <h2>Ticket Status: my group</h2>
+      <h2>Ticket Trends: daily</h2>
       <Line options={options} data={data} />
     </div>
   );

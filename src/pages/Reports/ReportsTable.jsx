@@ -47,7 +47,12 @@ const slaComp = (p) => {
   );
 };
 
-const ReportsTable = ({ tickets, selectedFields }) => {
+const ReportsTable = ({
+  tickets,
+  selectedFields,
+  setSelectedFields,
+  selected,
+}) => {
   const [gridApi, setGridApi] = useState(null);
   const [gridColumnApi, setGridColumnApi] = useState(null);
   const [columnDefs, setColumnsDefs] = useState([]);
@@ -63,23 +68,82 @@ const ReportsTable = ({ tickets, selectedFields }) => {
     resizable: true,
     flex: 1,
     sortable: true,
+    minWidth: 80,
   }));
 
   useEffect(() => {
-    setRowData(tickets);
+    if (selected === undefined || selected[0] !== "Device types") {
+      setRowData(tickets);
+      console.log("called", tickets);
+    } else {
+      let arr2 = [];
+      arr2.push(tickets);
+      console.log("tickets2", arr2);
+      setRowData(arr2);
+    }
   }, [tickets]);
 
   useEffect(() => {
-    const arr = [];
+    let arr = [];
 
-    fieldNames?.map((singleField, index) => {
-      if (selectedFields?.includes(singleField)) {
-        arr.push({ field: singleField, headerName: mapNames[index] });
-      }
-    });
+    if (selected === undefined || selected[0] === "By Tickets") {
+      fieldNames?.map((singleField, index) => {
+        if (selectedFields?.includes(singleField)) {
+          arr.push({ field: singleField, headerName: mapNames[index] });
+        }
+      });
+    } else if (selected[0] === "Device types") {
+      arr = [
+        { field: "SVC" },
+        { field: "RVC" },
+        { field: "LPRC" },
+        { field: "VC" },
+        { field: "MC" },
+        { field: "CB" },
+        { field: "PC" },
+        { field: "IDP" },
+        { field: "PT" },
+        { field: "DPU" },
+        { field: "HEX" },
+        { field: "ACU" },
+        { field: "SW" },
+        { field: "RT" },
+        { field: "FW" },
+        { field: "IOD" },
+        { field: "MH" },
+        { field: "FC" },
+        { field: "PTZ" },
+        { field: "HPTZ" },
+        { field: "VOP" },
+        { field: "VOG" },
+        { field: "LPR" },
+        { field: "RD" },
+        { field: "LZ" },
+        { field: "Total" },
+      ];
+    } else if (selected[0] === "Status") {
+      arr = [
+        { field: "Total" },
+        { field: "Open" },
+        { field: "Close" },
+        { field: "In-Progress" },
+        { field: "On-Hold (POC)" },
+        { field: "On-Hold (NOC)" },
+        { field: "IN-QUEUE" },
+      ];
+    } else {
+      arr = [
+        { field: "Total" },
+        { field: "Under Resolve SLA" },
+        { field: "Over Resolve SLA" },
+        { field: "Under Respond SLA" },
+        { field: "Over Respond SLA" },
+        { field: "On Hold" },
+      ];
+    }
 
     setColumnsDefs(arr);
-  }, [selectedFields]);
+  }, [selectedFields, selected]);
 
   return (
     <div className="grid-container">

@@ -29,7 +29,7 @@ For Device
 
 const filterOptions = ["Status", "SLA", "Device types", "By Tickets"];
 
-const durationOptions = ["Day", "Month", "Year"];
+const durationOptions = ["Daily", "Weekly", "Monthly"];
 
 const statusOptions = [
   "OPEN",
@@ -68,7 +68,13 @@ const deviceOptions = [
 ];
 const sla = ["Respond Time", "Resolve Time"];
 
-const Filters = ({ selected, setSelected }) => {
+const Filters = ({
+  selected,
+  setSelected,
+  setStatuses,
+  setDeviceTypes,
+  setDuration,
+}) => {
   return (
     <>
       <div
@@ -93,6 +99,7 @@ const Filters = ({ selected, setSelected }) => {
             placeholder={"Select Device"}
             label={"Device Type"}
             options={deviceOptions}
+            setSelected={setDeviceTypes}
           />
         )}
         {(selected[0] === "By Tickets" ||
@@ -102,6 +109,7 @@ const Filters = ({ selected, setSelected }) => {
             placeholder={"Status"}
             label={"Set Status"}
             options={statusOptions}
+            setSelected={setStatuses}
           />
         )}
 
@@ -110,6 +118,7 @@ const Filters = ({ selected, setSelected }) => {
           label={"Duration"}
           options={durationOptions}
           singleSelect={true}
+          setSelected={setDuration}
         />
       </div>
     </>
