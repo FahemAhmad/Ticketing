@@ -52,7 +52,6 @@ const fieldNames = [
   "resolution",
   "maintanance_agent",
   "comments",
-  "source_time",
 ];
 
 const mapNames = [
