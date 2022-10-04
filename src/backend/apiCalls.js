@@ -13,22 +13,35 @@ const addTicketApi = (values) => httpService.post(`/addTicket`, values);
 const getApiStatsApi = () => httpService.get(`/ticketStats`);
 
 //Get  Charts
-const getOpenTicketsApi = () => httpService.get("/getSlaChart?date=weekly");
+const getOpenTicketsApi = (body) =>
+  httpService.get(
+    `/getSlaChart?date=custom&start_date=${body.start_date}&end_date=${body.end_date}`
+  );
 
 //get line charts
-const getLineChartApi = () => httpService.get("/getTicketTrends?date=daily");
+const getLineChartApi = (body) =>
+  httpService.get(
+    `/getTicketTrends?date=custom&start_date=${body.start_date}&end_date=${body.end_date}`
+  );
 
 //stacked chart
-const getStackedChartApi = () =>
-  httpService.get("/getDeviceTypeChart?date=weekly");
+const getStackedChartApi = (body) =>
+  httpService.get(
+    `/getDeviceTypeChart?date=custom&start_date=${body.start_date}&end_date=${body.end_date}`
+  );
 
 //get bar chart
-const getBarChartApi = () =>
-  httpService.get("/getTicketStatusChart?date=weekly");
+const getBarChartApi = (body) =>
+  httpService.get(
+    `/getTicketStatusChart?date=custom&start_date=${body.start_date}&end_date=${body.end_date}`
+  );
 
 //get Tickets Reports
-const getTicketReportsApi = (body) =>
-  httpService.post("/getTicketsReport", body);
+const getTicketReportsApi = (body, params) =>
+  httpService.post(
+    `/getTicketsReport?start_date=${params.start_date}&end_date=${params.end_date}&date=${body.date}`,
+    body
+  );
 
 //Device Type Report
 const getByDeviceTypeApi = (body) =>
@@ -47,6 +60,9 @@ const getAddUserApi = (body) => httpService.post("/addUser", body);
 //upload file
 const fileUploadApi = (body) => httpService.post("/importTicketsData", body);
 
+//update rows
+const updateRowApi = (body) => httpService.put("/updateTicket", body);
+
 export default {
   loginApi,
   getTicketsApi,
@@ -62,4 +78,5 @@ export default {
   getSLAReportApi,
   getAddUserApi,
   fileUploadApi,
+  updateRowApi,
 };

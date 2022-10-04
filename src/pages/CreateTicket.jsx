@@ -23,33 +23,50 @@ const TicketSchema = Yup.object().shape({
   maintanance_agent: Yup.string(),
   comments: Yup.string(),
   sourceTime: Yup.string(),
+  status: Yup.string().required(),
+  element_type: Yup.string().required(),
+  element_id: Yup.string().required(),
+  device_type: Yup.string().required(),
+  TDM_no: Yup.string().required(),
 });
 
 const initialValues = {
   source_incident_no: "",
   reporting_source: "",
   internal_incident_no: "",
+  status: "",
+  source_time: "",
   phase: "",
   site: "",
+  element_type: "",
+  element_id: 0,
   device_type: "",
   last_octet: "",
   fault_description: "",
   resolution: "",
+  TDM_no: 0,
   maintanance_agent: "",
   comments: "",
-  source_time: new Date(),
+  source_time: "",
+  network_no: "",
 };
 
 const fieldNames = [
   "source_incident_no",
   "reporting_source",
   "internal_incident_no",
+  "status",
+  "source_time",
   "phase",
+  "network_no",
   "site",
+  "element_type",
+  "element_id",
   "device_type",
   "last_octet",
   "fault_description",
   "resolution",
+  "TDM_no",
   "maintanance_agent",
   "comments",
 ];
@@ -58,12 +75,18 @@ const mapNames = [
   "Source Incident No#",
   "Reporting Source",
   "Internal Incident No#",
+  "Status",
+  "Source Time (2022-10-02 11:00)",
   "Phase",
+  "Network no",
   "Site",
+  "Element Type",
+  "Element id",
   "Device Type",
   "Last Octet",
   "Fault Description",
   "Resolution",
+  "TDM No",
   "Maintanance Agent",
   "Comments",
 ];
@@ -75,7 +98,7 @@ const AddNewTicket = async (values, resetForm) => {
       console.log(data);
       resetForm();
     })
-    .catch((err) => alert("Error adding Ticket"));
+    .catch((err) => console.log("Error adding Ticket", err));
 };
 
 const CreateTicket = () => {
@@ -94,7 +117,14 @@ const CreateTicket = () => {
         Add Ticket
       </h1>
 
-      <div style={{ maxWidth: 1200, margin: "auto", border: "1px solid gray" }}>
+      <div
+        style={{
+          minWidth: 1000,
+          maxWidth: 1600,
+          margin: "auto",
+          border: "1px solid gray",
+        }}
+      >
         <div className="mt-5 md:col-span-2 md:mt-0">
           <Formik
             initialValues={initialValues}
@@ -125,7 +155,11 @@ const CreateTicket = () => {
                             <u className="no-underline">{mapNames[index]} :</u>
                           </label>
                           <input
-                            type="text"
+                            type={
+                              typeof values[singleField] === "string"
+                                ? "text"
+                                : "number"
+                            }
                             name={singleField}
                             id={singleField}
                             value={values[singleField]}

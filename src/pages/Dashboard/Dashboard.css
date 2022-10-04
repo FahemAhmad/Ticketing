@@ -42,7 +42,7 @@
 .graphs-row {
   display: flex;
   gap: 15px;
-  min-height: 40vh;
+  min-height: 60vh;
 }
 
 /* StatsCard Styles */
@@ -107,6 +107,8 @@
 
 .fieldNames-container {
   margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .circle {

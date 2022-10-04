@@ -9,8 +9,10 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { faker } from "@faker-js/faker";
 import apiCalls from "../../backend/apiCalls";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+import moment from "moment";
 
 ChartJS.register(
   CategoryScale,
@@ -21,38 +23,27 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  indexAxis: "y",
-  plugins: {
-    legend: {
-      display: false,
-    },
-    title: {
-      display: false,
-    },
-  },
-  responsive: true,
-  scales: {
-    x: {
-      stacked: true,
-    },
-    y: {
-      stacked: true,
-    },
-  },
-};
-
 export function CStackedChart() {
   let cleanup = true;
   const [openTicekts, setOpenTickets] = useState();
   const [graphData, setGraphData] = useState();
   const [fieldNames, setFieldName] = useState();
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
+  const [startString, setStartString] = useState("2022-10-01");
+  const [endString, setEndString] = useState("2022-10-02");
 
   const getOpenTickets = async () => {
     await apiCalls
-      .getStackedChartApi()
-      .then((data) => setOpenTickets(data?.data))
-      .catch((err) => console.log("Err Getting Open Tickets"));
+      .getOpenTicketsApi({
+        start_date: startString,
+        end_date: endString,
+      })
+      .then((data) => {
+        setOpenTickets(data?.data);
+      })
+      .catch((err) => console.log("Err Getting Open Tickets", err));
   };
 
   useEffect(() => {
@@ -74,9 +65,14 @@ export function CStackedChart() {
     }
   }, [openTicekts]);
 
+  useEffect(() => {
+    if (startString && endString) {
+      getOpenTickets();
+    }
+  }, [endString, startString]);
+
   //Chart details
   const options = {
-    indexAxis: "y",
     responsive: true,
     plugins: {
       legend: {
@@ -87,16 +83,6 @@ export function CStackedChart() {
       },
     },
   };
-
-  const labels = [
-    "New",
-    "Assigned",
-    "In Progress",
-    "On Hold",
-    "Awaiting Customer Response",
-    "Auto Closed by Rules",
-    "Closed Today",
-  ];
 
   const data = {
     labels: fieldNames,
@@ -110,9 +96,71 @@ export function CStackedChart() {
   };
 
   return (
-    <div className="chart-container ">
-      <h2>Open Tickets: severity level</h2>
-      <Bar options={options} data={data} />
-    </div>
+    <>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          width: "100%",
+          padding: 10,
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            minWidth: "max-content",
+          }}
+        >
+          <span
+            style={{
+              minWidth: "max-content",
+              marginTop: 10,
+            }}
+          >
+            Start Date:
+          </span>
+          <div style={{ width: 200 }}></div>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => {
+              setStartString(() => moment(date).format("YYYY-MM-DD"));
+              setStartDate(date);
+            }}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            minWidth: "max-content",
+          }}
+        >
+          <span
+            style={{
+              minWidth: "max-content",
+              marginTop: 10,
+            }}
+          >
+            End Date:
+          </span>
+          <div style={{ width: 210 }}></div>
+          <DatePicker
+            selected={endDate}
+            onChange={(date) => {
+              setEndString(() => moment(date).format("YYYY-MM-DD"));
+              setEndDate(date);
+            }}
+          />
+        </div>
+      </div>
+      <div className="chart-container " style={{ minHeight: 0 }}>
+        <h2>Tickets Device Wise</h2>
+        <Bar options={options} data={data} />
+      </div>
+    </>
   );
 }

@@ -1,7 +1,9 @@
 import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Logo from "../assets/images/logo.png";
+import Logo from "../assets/images/country.jpeg";
+import Client from "../assets/images/client.jpeg";
+import Integrator from "../assets/images/integrator.jpeg";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 function classNames(...classes) {
@@ -27,7 +29,6 @@ const Navbar = () => {
             current: location.pathname === "/reports",
             link: "/reports",
           },
-          { name: "Asset Inventory", href: "#", current: false },
           {
             name: "Create Ticket",
             href: "#",
@@ -61,7 +62,6 @@ const Navbar = () => {
             current: location.pathname === "/reports",
             link: "/reports",
           },
-          { name: "Asset Inventory", href: "#", current: false },
         ];
 
   const navigate = useNavigate();
@@ -88,14 +88,38 @@ const Navbar = () => {
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
+                    <span>Incident Management System</span>
+                    <div>
+                      <img
+                        className="block h-8 w-auto lg:hidden"
+                        src={Client}
+                        alt="Your Company"
+                      />
+                      <img
+                        className="block h-8 w-auto lg:hidden"
+                        src={Logo}
+                        alt="Your Country"
+                      />
+
+                      <img
+                        className="block h-8 w-auto lg:hidden"
+                        src={Integrator}
+                        alt="Your Integrator"
+                      />
+                    </div>
                     <img
-                      className="block h-8 w-auto lg:hidden"
-                      src={Logo}
+                      className="hidden h-12 w-auto lg:block"
+                      src={Client}
                       alt="Your Company"
                     />
                     <img
                       className="hidden h-8 w-auto lg:block"
                       src={Logo}
+                      alt="Your Company"
+                    />
+                    <img
+                      className="hidden h-12 w-auto lg:block"
+                      src={Integrator}
                       alt="Your Company"
                     />
                   </div>

@@ -11,18 +11,35 @@ import UploadFile from "./pages/UploadFile";
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/addTicket" element={<CreateTicket />} />
-          <Route path="/createUser" element={<CreateUser />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/uploadFile" element={<UploadFile />} />
-          <Route path="*" element={<Dashboard />} />
-        </Routes>
-      </BrowserRouter>
+      <div
+        style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+      >
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/addTicket" element={<CreateTicket />} />
+            <Route path="/createUser" element={<CreateUser />} />
+            <Route path="/reports" element={<Reports />} />
+            <Route path="/uploadFile" element={<UploadFile />} />
+            <Route path="*" element={<Dashboard />} />
+          </Routes>
+          <div style={{ flex: 1 }} />
+          <footer
+            style={{
+              width: "100vw",
+              padding: 10,
+              backgroundColor: "#f1f7fc",
+              borderTop: "1px solid black",
+
+              textAlign: "center",
+            }}
+          >
+            Ⓒ Copyright - 2022
+          </footer>
+        </BrowserRouter>
+      </div>
     </>
   );
 }

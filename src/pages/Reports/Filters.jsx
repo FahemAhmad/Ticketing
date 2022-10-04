@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import Dropdown from "../../components/Dropdown";
 import "./Reports.css";
-
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+import moment from "moment";
 /*
 If By Tickets - Show the following fields
 * Date
@@ -76,7 +78,12 @@ const Filters = ({
   setDuration,
   deviceTrigger,
   stateTrigger,
+  setStartString,
+  setEndString,
 }) => {
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
   return (
     <>
       <div
@@ -123,7 +130,49 @@ const Filters = ({
           options={durationOptions}
           singleSelect={true}
           setSelected={setDuration}
+          trigger={() => {
+            setEndString("");
+            setStartString("");
+          }}
         />
+        <div style={{ display: "flex", marginBottom: 10 }}>
+          <div>
+            <span
+              style={{
+                minWidth: "max-content",
+                marginTop: 10,
+              }}
+            >
+              Start Date:
+            </span>
+
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => {
+                setStartString(() => moment(date).format("YYYY-MM-DD"));
+                setStartDate(date);
+              }}
+            />
+          </div>
+          <div>
+            <span
+              style={{
+                minWidth: "max-content",
+                marginTop: 10,
+              }}
+            >
+              End Date:
+            </span>
+
+            <DatePicker
+              selected={endDate}
+              onChange={(date) => {
+                setEndString(() => moment(date).format("YYYY-MM-DD"));
+                setEndDate(date);
+              }}
+            />
+          </div>
+        </div>
       </div>
     </>
   );

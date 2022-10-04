@@ -13,7 +13,6 @@ axios.interceptors.response.use(null, (error) => {
 
   if (!expectedError) {
     console.log("Logging error", error);
-    alert("An unexpected Error occurred");
   }
 
   return Promise.reject(error);

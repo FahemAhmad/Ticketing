@@ -11,10 +11,12 @@ const Reports = () => {
   const [tickets, setTickets] = useState();
 
   const [statuses, setStatuses] = useState([]);
-  const [duration, setDuration] = useState("monthly");
+  const [duration, setDuration] = useState(["monthly"]);
   const [deviceTypes, setDeviceTypes] = useState([]);
   const [deviceTypesTrigger, setDeviceTrigger] = useState();
   const [stateTypeTrigger, setStateTrigger] = useState();
+  const [startString, setStartString] = useState("2021-10-01");
+  const [endString, setEndString] = useState("2021-10-01");
 
   const handleDevice = () => {
     setDeviceTrigger(!deviceTypesTrigger);
@@ -29,11 +31,17 @@ const Reports = () => {
   const getTickets = async () => {
     if (selected[0] === "By Tickets") {
       await apiCalls
-        .getTicketReportsApi({
-          status: statuses,
-          device_type: deviceTypes,
-          date: duration[0].toLowerCase(),
-        })
+        .getTicketReportsApi(
+          {
+            status: statuses,
+            device_type: deviceTypes,
+            date: duration[0].toLowerCase(),
+          },
+          {
+            start_date: startString,
+            end_date: endString,
+          }
+        )
         .then((data) => {
           setTickets(data?.data);
         })
@@ -91,10 +99,16 @@ const Reports = () => {
   }, []);
 
   useEffect(() => {
-    console.log("get Tickets Called");
     getTickets();
   }, [stateTypeTrigger, duration, deviceTypesTrigger, selected]);
 
+  useEffect(() => {
+    if (startString.length > 0 && endString.length > 0) {
+      setDuration(["custom"]);
+      getTickets();
+      console.log("stringer called", startString);
+    }
+  }, [startString, endString]);
   return (
     <>
       <div
@@ -113,6 +127,8 @@ const Reports = () => {
             setDuration={setDuration}
             deviceTrigger={handleDevice}
             stateTrigger={handleState}
+            setStartString={setStartString}
+            setEndString={setEndString}
           />
           {selected[0] === "By Tickets" && (
             <SelectedFields setSelectedFields={setSelectedFields} />

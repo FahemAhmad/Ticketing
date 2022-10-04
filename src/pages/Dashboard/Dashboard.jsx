@@ -52,23 +52,26 @@ const Dashboard = () => {
     <div className="dashboard-contianer">
       <div className="stats-container">
         <StatsCard
-          title={"Tickets i created today"}
+          title={"Created Tickets"}
           counter={stats ? stats.tickets_created_today : 0}
         />
-        <StatsCard
-          title={"Tickets Closed Today"}
-          counter={stats ? stats.tickets_closed_today : 0}
-        />
-        <StatsCard title={"Open tickets"} counter={stats ? stats.open : 0} />
         <StatsCard
           title={"Closed Tickets"}
           counter={stats ? stats.closed : 0}
         />
+        <StatsCard title={"Open tickets"} counter={stats ? stats.open : 0} />
         <StatsCard
-          title={"In Progress tickets"}
+          title={"On-Hold Tickets"}
+          counter={stats ? stats.on_hold_noc + stats.on_hold_poc : 0}
+        />
+        <StatsCard
+          title={"In-Progress Tickets"}
           counter={stats ? stats.in_progress : 0}
         />
-        <StatsCard title={"In Queue"} counter={stats ? stats.in_queue : 0} />
+        <StatsCard
+          title={"Re-Opened Tickets"}
+          counter={stats ? stats.on_hold_poc : 0}
+        />
       </div>
 
       <div className="second-row">
@@ -76,14 +79,14 @@ const Dashboard = () => {
           <GridTable tickets={tickets} />
         </div>
         <div className="graph-container">
-          <OpenTickets />
+          <CStackedChart />
         </div>
       </div>
 
       <div className="graphs-row">
         <CBarChart />
         <CAreaChart />
-        <CStackedChart />
+        <OpenTickets />
       </div>
     </div>
   );
