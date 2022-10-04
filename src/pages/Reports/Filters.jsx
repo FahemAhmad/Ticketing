@@ -74,6 +74,8 @@ const Filters = ({
   setStatuses,
   setDeviceTypes,
   setDuration,
+  deviceTrigger,
+  stateTrigger,
 }) => {
   return (
     <>
@@ -100,6 +102,7 @@ const Filters = ({
             label={"Device Type"}
             options={deviceOptions}
             setSelected={setDeviceTypes}
+            trigger={deviceTrigger}
           />
         )}
         {(selected[0] === "By Tickets" ||
@@ -110,6 +113,7 @@ const Filters = ({
             label={"Set Status"}
             options={statusOptions}
             setSelected={setStatuses}
+            trigger={stateTrigger}
           />
         )}
 

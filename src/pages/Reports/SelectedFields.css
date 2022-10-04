@@ -19,9 +19,6 @@
 .not-checked-item {
   margin-left: 10px;
 }
-.not-checked-item {
-  text-decoration: line-through;
-}
 
 .list-row {
   width: 100%;

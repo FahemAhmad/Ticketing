@@ -2,11 +2,17 @@ import React from "react";
 import Multiselect from "multiselect-react-dropdown";
 import "../pages/Reports/Reports.css";
 
+const handleSelect = (e, setSelected, trigger) => {
+  setSelected(e);
+  trigger();
+};
+
 const Dropdown = ({
   label,
   options,
   placeholder,
   singleSelect = false,
+  trigger = function nothing() {},
   setSelected = function noRefCheck() {},
 }) => {
   return (
@@ -16,9 +22,9 @@ const Dropdown = ({
         className="dropdown-list"
         isObject={false}
         onKeyPressFn={function noRefCheck() {}}
-        onRemove={function noRefCheck() {}}
+        onRemove={() => trigger()}
         onSearch={function noRefCheck() {}}
-        onSelect={(e) => setSelected(e)}
+        onSelect={(e) => handleSelect(e, setSelected, trigger)}
         placeholder={placeholder}
         options={options}
         singleSelect={singleSelect}

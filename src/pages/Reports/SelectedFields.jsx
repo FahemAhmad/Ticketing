@@ -5,14 +5,25 @@ const checkList = [
   "source_incident_no",
   "reporting_source",
   "internal_incident_no",
+  "status",
+  "opening_time",
+  "source_time",
   "phase",
+  "network_no",
   "site",
+  "element_type",
+  "element_id",
   "device_type",
   "last_octet",
   "fault_description",
   "resolution",
+  "TDM_no",
+  "closing_time",
   "maintanance_agent",
   "comments",
+  "time_to_respond",
+  "time_to_resolve",
+  "sla"
 ];
 
 const SelectedFields = ({ setSelectedFields }) => {

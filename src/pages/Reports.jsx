@@ -13,6 +13,16 @@ const Reports = () => {
   const [statuses, setStatuses] = useState([]);
   const [duration, setDuration] = useState("monthly");
   const [deviceTypes, setDeviceTypes] = useState([]);
+  const [deviceTypesTrigger, setDeviceTrigger] = useState();
+  const [stateTypeTrigger, setStateTrigger] = useState();
+
+  const handleDevice = () => {
+    setDeviceTrigger(!deviceTypesTrigger);
+  };
+
+  const handleState = () => {
+    setStateTrigger(!stateTypeTrigger);
+  };
 
   let cleanUp = true;
 
@@ -44,7 +54,6 @@ const Reports = () => {
           console.log("Error with Ticketing", err);
         });
     } else if (selected[0] === "Status") {
-      console.log("Status");
       await apiCalls
         .getTicketStatusReportApi({
           device_type: deviceTypes,
@@ -82,8 +91,9 @@ const Reports = () => {
   }, []);
 
   useEffect(() => {
+    console.log("get Tickets Called");
     getTickets();
-  }, [statuses, duration, deviceTypes, selected]);
+  }, [stateTypeTrigger, duration, deviceTypesTrigger, selected]);
 
   return (
     <>
@@ -101,6 +111,8 @@ const Reports = () => {
             setStatuses={setStatuses}
             setDeviceTypes={setDeviceTypes}
             setDuration={setDuration}
+            deviceTrigger={handleDevice}
+            stateTrigger={handleState}
           />
           {selected[0] === "By Tickets" && (
             <SelectedFields setSelectedFields={setSelectedFields} />

@@ -22,6 +22,7 @@ const TicketSchema = Yup.object().shape({
   resolution: Yup.string(),
   maintanance_agent: Yup.string(),
   comments: Yup.string(),
+  sourceTime: Yup.string(),
 });
 
 const initialValues = {
@@ -36,6 +37,7 @@ const initialValues = {
   resolution: "",
   maintanance_agent: "",
   comments: "",
+  source_time: new Date(),
 };
 
 const fieldNames = [
@@ -50,6 +52,7 @@ const fieldNames = [
   "resolution",
   "maintanance_agent",
   "comments",
+  "source_time",
 ];
 
 const mapNames = [
